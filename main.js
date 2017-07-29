@@ -78,11 +78,14 @@ function question5 () {
   for (let i=0; i<data.length; i++){
     container.push(data[i].materials);
     for (let j=0; j<container.length; j++){
-      if (container[i][j]) // NOTE: Contains more than 8?
+      if (container[i][j] >= 8){ // NOTE: Contains more than 8?
+        items.push(data[i].title);
+      }
     }
   }
+  console.log(items);
 }
-
+question5();
 
 
 // 6: How many items were made by their sellers?
