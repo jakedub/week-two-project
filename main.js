@@ -60,20 +60,19 @@ function question4 () {
     container.push(data[i].materials);
     for (let j=0; j<container.length; j++){
       if (container[i][j] === "wood"){
-        items.push(data[i].materials);
+        items.push(data[i].title);
       }
     }
   }
 return items;
 }
 
-question4();
+console.log(question4());
 
 
 // 5: Which items are made of eight or more materials?
 //    Display the name, number of items and the items it is made of.
 function question5 () {
- let item = data[i];
  for (let i = 0; i < data.length; i++) {
    if (data[i].materials.length >7) {
    console.log(`${data[i].title} has ${data[i].materials.length} materials:`);
