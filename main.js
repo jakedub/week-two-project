@@ -2,54 +2,55 @@
 // you have access to the `data` variable that contains the Etsy Store data.
 // Open your `index.html` page in your browser and you can verify that the following
 // is properly working. The `data` variable is an array with 25 items in it
-console.log(data);
+// console.log(data);
 
 
 // 1: Show me how to calculate the average price of all items.
 function question1 () {
-  let price = [];
-  for (i=0; i<data.length; i++){ //i is declaring the array number, data.length is the length of the array, adding one
-    price.push(data[i].price); //pushing into new price array from the data variable all of the properties of price
+  let priceSum = 0;
+  let averagePrice = 0;
+  for (let i=0; i<data.length; i++) {
+    priceSum += data[i].price;
   }
-  let sum = 0;
-  for (let j=0; j<price.length; j++){ //set to 0 to add to it. referencing price array just newly built
-    sum=sum + price[j]; //going through and adding all the prices and applying to the sum
-    average = sum/(price.length); //creating the average
-    newNumber = average.toFixed(2); //taking the average and applying a fix to round up the number to third position
-    }
-    return (newNumber); //needs rounded
+  averagePrice = (Math.ceil((priceSum/data.length)*100)/100);
+  console.log("The average price is $" + averagePrice);
 }
-console.log("The average price is " + question1()); //calls the function
-
 
 
 
 // 2: Show me how to get an array of items that cost between $14.00 and $18.00 USD
 function question2 () {
-  let item =[];
-  for (let i=0; i<data.length; i++){
-    if (data[i].price <= 18 && data[i].price >= 14) { //if price object within data variable <= 18 AND price object  greater than
-      item.push(data[i].title); //pushes to item variable as array the title from data variable
-    }
-  } return item;
-}
-console.log(question2());
+  let priceMin = 14;
+  let priceMax = 18;
+  let priceNew = [];
 
+  for (let i=0; i<data.length; i++) {
+    if (data[i].price >= priceMin && data[i].price <= priceMax) {
+      priceNew.push(data[i]);
+    }
+  }
+  for (let i=0; i<priceNew.length; i++) {
+    console.log(priceNew[i].title);
+  }
+}
 
 
 
 // 3: Which item has a "GBP" currency code? Display it's name and price.
 function question3 () {
-  let code = [];
-  for (i=0; i<data.length; i++){
-    if (data[i].currency_code === "GBP"){
-      code.push(data[i].title);
+  let itemTitle = [];
+  let itemPrice = [];
+
+  for (let i=0; i<data.length; i++) {
+    if (data[i].currency_code === 'GBP') {
+      itemTitle.push(data[i].title);
+      itemPrice.push(data[i].price);
     }
   }
-  return code;
+  for (let i=0; i<itemPrice.length; i++) {
+    console.log(itemTitle[i] + " costs " + itemPrice[i] + " pounds.");
+  }
 }
-
-console.log(question3());
 
 
 // 4: Display a list of all items who are made of wood.
@@ -61,13 +62,14 @@ function question4 () {
     for (let j=0; j<container.length; j++){
       if (container[i][j] === "wood"){
         items.push(data[i].title);
+        console.log(`${data[i].title}`);
       }
     }
   }
 return items;
 }
+question4();
 
-console.log(question4());
 
 
 // 5: Which items are made of eight or more materials?
@@ -95,7 +97,6 @@ function question6 () {
       made.push(data[i].who_made);
       count = made.length;
     }
-  } return count;
+  }
+    console.log(count + " items were made by their sellters.");
 }
-
-console.log(question6() + " items were made by their sellers.");
